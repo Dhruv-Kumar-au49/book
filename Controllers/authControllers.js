@@ -64,7 +64,7 @@ let profile = async (req, res) => {
 
 let logout = (req, res) => {
     res.cookie('jwt', '')
-    res.sendFile('C:/Users/dhruv/OneDrive/Desktop/book library website/public/welcome.html')
+     res.sendFile(path.join(__dirname,'../public/welcome.html'))
 console.log('logout');
 }
 
