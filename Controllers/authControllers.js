@@ -31,6 +31,22 @@ let signup = async (req, res) => {
 
 }
 
+let library =async (req,res)=>{
+
+    // let data=req.cookies.jwt
+    // console.log(data)
+        let token = req.cookies.jwt
+        if(token){
+        let userdata = jwt.verify(token,process.env.jwtKey)
+       
+        let { email, name } = userdata;
+        user = await userModel.findOne({ email, name })
+        res.sendFile(path.join(__dirname,'../public/library.html'))}
+        else{
+            res.sendFile(path.join(__dirname,'../public/login.html'))
+        }
+}
+
 let login = async (req, res) => {
     let { email, password } = req.body
     // console.log(req.body);
@@ -73,5 +89,6 @@ module.exports = {
     login,
     signup,
     logout,
-    profile
+    profile,
+    library
 }
