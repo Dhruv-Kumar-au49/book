@@ -5,7 +5,7 @@ dotenv.config()
 app.use(express.static('public'))
 app.use(express.urlencoded())
 let multer = require('multer')
-const { signup, login,profile, logout } = require('./Controllers/authControllers')
+const { signup, login,profile, logout,library } = require('./Controllers/authControllers')
 const { initDB } = require('./DbConfig')
 let upload = multer({storage:multer.memoryStorage()})
 let cookieParser = require('cookie-parser')
@@ -36,10 +36,7 @@ app.get('/login',(req,res)=>{
 })
 
 app.get('/logout',logout)
-app.get('/library',(req,res)=>{
-
-    res.sendFile('/public/library.html',{ root: __dirname })
-})
+app.get('/library',library)
 
 app.post('/signup',upload.single('image'),signup)
 
